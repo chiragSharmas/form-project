@@ -532,6 +532,7 @@ function close(){
     divs.style.display ="none"
     const bg = document.querySelector(".bg");
 bg.style.display = "none"
+window.location.reload()
 }
 
 
