@@ -31,11 +31,11 @@ let fullname = document.getElementById("fullName");
     const imageRegex = /\.(jpg|jpeg|png)$/i;
 
 
-
+    // full name blur event listner
  const fullnameregex = /^[A-Za-z]{3,50}$/;
  fullname.addEventListener('blur', () => {
  
-     if (formNumber == 1) {
+    
          if (fullname.value === "" || !fullnameregex.test(fullname.value)) {
              document.querySelector(".fullnameError").style.display = "block";
              fullname.classList.add("error");
@@ -44,9 +44,9 @@ let fullname = document.getElementById("fullName");
              document.querySelector(".fullnameError").style.display = "none";
              fullname.classList.remove("error");
          }
-     }
+     
  });
- 
+//   email blur event listner
  const emailregex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
  Email.addEventListener('blur', () => {
 
@@ -61,11 +61,141 @@ else{
     Email.classList.remove("error")
 }
  })
-
-
+//   password blur event listner
 
  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+ Password.addEventListener("blur", () => {
+    if (Password.value === "" || !passwordRegex.test(Password.value)) {
+        document.querySelector(".passwordError").style.display = "block";
+        Password.classList.add("error");
+    } else {
+        document.querySelector(".passwordError").style.display = "none";
+        Password.classList.remove("error");
+    }
+});
+//  confirm password blur event listner
+Confirmpassword.addEventListener("blur", () => {
+    if (Password.value !== Confirmpassword.value) {
+        document.querySelector(".confirmError").style.display = "block";
+        Confirmpassword.classList.add("error");
+    } else {
+        document.querySelector(".confirmError").style.display = "none";
+        Confirmpassword.classList.remove("error");
+    }
+});
+//  age blur event listner
+Age.addEventListener("blur", () => {
+    const ageValue = parseInt(Age.value);
 
+    if (Age.value === "" || isNaN(ageValue) || ageValue < 18 || ageValue > 120) {
+        document.querySelector(".ageError").style.display = "block";
+        Age.classList.add("error");
+    } else {
+        document.querySelector(".ageError").style.display = "none";
+        Age.classList.remove("error");
+    }
+});
+
+const phoneRegex = /^[6-9]\d{9}$/;
+Phone.addEventListener("blur", () => {
+    
+
+    if (Phone.value === "" || !phoneRegex.test(Phone.value)) {
+        document.querySelector(".phoneError").style.display = "block";
+        Phone.classList.add("error");
+    } else {
+        document.querySelector(".phoneError").style.display = "none";
+        Phone.classList.remove("error");
+    }
+});
+const addressRegex = /^.{1,200}$/;
+Address.addEventListener("blur", () => {
+    const addressRegex = /^.{1,200}$/;
+
+    if (Address.value === "" || !addressRegex.test(Address.value)) {
+        document.querySelector(".addressError").style.display = "block";
+        Address.classList.add("error");
+    } else {
+        document.querySelector(".addressError").style.display = "none";
+        Address.classList.remove("error");
+    }
+});
+const cityRegex = /^[A-Za-z\s]+$/;
+
+City.addEventListener("blur", () => {
+    const cityRegex = /^[A-Za-z\s]{1,}$/;
+
+    if (City.value === "" || !cityRegex.test(City.value)) {
+        document.querySelector(".cityError").style.display = "block";
+        City.classList.add("error");
+    } else {
+        document.querySelector(".cityError").style.display = "none";
+        City.classList.remove("error");
+    }
+});
+
+Country.addEventListener("blur", () => {
+    if (Country.value === "" || Country.value === "Select Country") {
+        document.querySelector(".countryError").style.display = "block";
+        Country.classList.add("error");
+    } else {
+        document.querySelector(".countryError").style.display = "none";
+        Country.classList.remove("error");
+    }
+});
+const zipPatterns = {
+    "India": /^\d{6}$/,
+    "USA": /^\d{5}(-\d{4})?$/,
+    "Canada": /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/,
+    "UK": /^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/
+};
+Zip.addEventListener("blur", () => {
+    const selectedCountry = Country.value;
+    const zipRegex = zipPatterns[selectedCountry];
+
+    if (!zipRegex || !zipRegex.test(Zip.value)) {
+        document.querySelector(".zipError").style.display = "block";
+        Zip.classList.add("error");
+    } else {
+        document.querySelector(".zipError").style.display = "none";
+        Zip.classList.remove("error");
+    }
+});
+
+
+profile.addEventListener("blur", () => {
+    if (profile.value === "" || !bioRegex.test(profile.value)) {
+        document.querySelector(".profileError").style.display = "block";
+        profile.classList.add("error");
+    } else {
+        document.querySelector(".profileError").style.display = "none";
+        profile.classList.remove("error");
+    }
+});
+Website.addEventListener("blur", () => {
+    if (Website.value === "" || !urlRegex.test(Website.value)) {
+        document.querySelector(".websiteError").style.display = "block";
+        Website.classList.add("error");
+    } else {
+        document.querySelector(".websiteError").style.display = "none";
+        Website.classList.remove("error");
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  all the functionality of next button starts from here
 const btn = document.getElementById("nextBtn")
 btn.addEventListener("click",()=>{
 
@@ -133,6 +263,7 @@ if ( parseInt(Age.value)<18 || parseInt(Age.value) > 120 || (Age.value === "") )
     document.querySelector(".ageError").style.display ="none"
     Age.classList.remove("error")
   }
+
   personalInfo.fullName = fullname.value
   personalInfo.password = Password.value
   personalInfo.email = Email.value
@@ -150,15 +281,10 @@ if ( parseInt(Age.value)<18 || parseInt(Age.value) > 120 || (Age.value === "") )
 
  
 // for 2 starts
-const phoneRegex = /^[6-9]\d{9}$/;
-const addressRegex = /^.{1,200}$/;
-const cityRegex = /^[A-Za-z\s]+$/;
-const zipPatterns = {
-    "India": /^\d{6}$/,
-    "USA": /^\d{5}(-\d{4})?$/,
-    "Canada": /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/,
-    "UK": /^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/
-    };
+
+
+
+
     
 if (formNumber == 2) {
     // Phone
@@ -232,19 +358,23 @@ if (formNumber === 3) {
 preferences.contactMethod = selectedContactMethod ? selectedContactMethod.value : "";
 console.log(preferences)
 
-const selectedPlan = document.querySelector('input[name="subscriptionPlan"]:checked');
-preferences.subscriptionPlan = selectedPlan ? selectedPlan.value : "";
 
-console.log(preferences);
 
-preferences.interests = [];
+
     if (!selectedContactMethod) {
         document.querySelector(".contactMethodError").style.display = "block";
+       
+
         return;
     } else {
         document.querySelector(".contactMethodError").style.display = "none";
+
     }
-  
+    preferences.interests = [];
+    const selectedPlan = document.querySelector('input[name="subscriptionPlan"]:checked');
+preferences.subscriptionPlan = selectedPlan ? selectedPlan.value : "";
+
+console.log(preferences);
     let isChecked = false;
     const interests = document.querySelectorAll('input[name="interests"]')
     interests.forEach((checkbox) => {
